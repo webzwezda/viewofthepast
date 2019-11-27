@@ -1,0 +1,144 @@
+html{
+  font-size: 15px;
+  font-family: $fText;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #eef3fb;
+  margin: 0;
+}
+img{
+  max-width: 100%;
+}
+.eee--article{
+  overflow: hidden;
+}
+.eee__article--h1{
+  margin-top: .6em;
+}
+h2{
+  font-size: calc(1.5em + 2px);
+}
+%paragraph{
+  font-size: 1em;
+  color: #414141;
+  font-family: $fText;
+  line-height: 26px;
+}
+%gap{
+  padding: 0 5px;
+}
+.site__header--wrap{
+  @extend %gap;
+  background-color: #273149;
+  box-shadow: 0 0 11px 1px rgba(0,0,0,.21);
+  margin-bottom: .5em;
+}
+.site__footer--wrap{
+  @extend %gap;
+  background-color: #263554;
+}
+.site__header{
+  min-height: 6vh;
+}
+.footer__content{
+  min-height: 6vh;
+}
+.main--wrap{
+  @extend %gap;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.main__aside0{
+  width: 100%;
+}
+.main__content{
+}
+.main__aside1{
+  order: 4;
+}
+.main__nav{
+  order: 3;
+}
+
+@include for-tablet-portrait-up {
+ // BASE START min-width: 600 ++++++++
+
+ // BASE END min-width: 600 ++++++++
+}
+@include for-tablet-landscape-up {
+ // BASE START min-width: 900px ++++++++
+ html{
+   font-size: 16px;
+ }
+ %paragraph{
+  line-height: 28px;
+ }
+ %siteWidth{
+   max-width: 1090px;
+   margin: 0 auto;
+ }
+ %gap{
+   padding: 0 5px;
+ }
+ .site__header{
+   @extend %siteWidth;
+ }
+ .site__footer{
+   @extend %siteWidth;
+ }
+ .footer__content{
+   max-width: 720px;
+ }
+.main--wrap{
+  @extend %siteWidth;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-grow: 1;
+  width: calc(100% - 10px);
+}
+.main__aside0{
+  width: 100%;
+}
+.main__content{
+  max-width: 720px;
+  flex-grow: 1;
+  width: 60%;
+}
+.main__aside1{
+  max-width: 220px;
+  padding: 0 10px;
+  margin-top: 24px;
+  flex-grow: 2;
+  order: 3;
+  width: 20%;
+}
+.main__nav{
+  max-width: 150px;
+  margin-top: 20px;
+  flex-grow: 1;
+  width: 20%;
+}
+ // BASE END min-width: 900px ++++++++
+}
+@include for-desktop-up {
+ // BASE START min-width: 1200px ++++++++
+ html{
+   font-size: 17px;
+ }
+ %paragraph{
+  line-height: 30px;
+ }
+ // BASE END min-width: 1200px ++++++++
+}
+@include for-big-desktop-up {
+ // BASE START min-width: 1800 ++++++++
+ %paragraph{
+  line-height: 33px;
+ }
+ // BASE END min-width: 1800 ++++++++
+}

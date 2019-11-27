@@ -1,0 +1,104 @@
+.full--img{
+  display: block;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+}
+.slider{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(color(yellow, 2), .3);
+  min-height: 165px;
+}
+.slider__image{
+  align-self: center;
+  vertical-align: bottom;
+  max-height: 165px;
+}
+#IMGpreloader{
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+}
+$butCol: rgba(color(red, 7), .9);
+.button--wrap{
+ text-align: right;
+}
+#prevBut{
+  &::before{
+    content: '\25C4';
+    font-size: .8em;
+    color: $butCol;
+  }
+}
+#nextBut{
+  &::after{
+    content: '\25BA';
+    font-size: .8em;
+    color: $butCol;
+  }
+}
+.galbut{
+  border: none;
+  background: transparent;
+  font-size: 1em;
+  font-weight: bold;
+  color: $butCol;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@media (min-width: 350px) and (max-width: 459px){
+.slider {
+  min-height: 220px;
+  }
+  .slider__image{
+    max-height: 220px;
+  }
+}
+
+@media (min-width: 460px){
+  .slider {
+    min-height: 302px;
+  }
+  .slider__image{
+    max-height: 302px;
+  }
+}
+
+@include for-tablet-portrait-up {
+  // BASE START min-width: 600 ++++++++
+  .slider {
+    min-height: 400px;
+  }
+    .slider__image{
+      max-height: 400px;
+    }
+  // BASE END min-width: 600 ++++++++
+}
+@include for-tablet-landscape-up {
+  // BASE START min-width: 900px ++++++++
+
+  // BASE END min-width: 900px ++++++++
+}
+// min-width: 1200px
+@include for-desktop-up {
+  // BASE START min-width: 1200px ++++++++
+  .slider {
+    min-height: 375px;
+  }
+  .slider__image{
+    max-height: 375px;
+  }
+  // BASE END min-width: 1200px ++++++++
+}
+@include for-big-desktop-up {
+  // BASE START min-width: 1800 ++++++++
+
+  // BASE END min-width: 1800 ++++++++
+}

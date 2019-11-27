@@ -1,0 +1,113 @@
+.posts{
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 2px;
+}
+.eee--home{
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding: 0;
+  border-radius: 2px;
+}
+.posts__title{
+  margin: 0 !important;
+  font-family: $fTitle;
+  line-height: 30px;
+  color: rgba(40,84,115,0.9);
+
+  a{
+    color: rgba(#285473, .9);
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+      color: #285473;
+      text-decoration: underline;
+    }
+  }
+}
+
+#page__title{
+  text-align: center;
+  font-size: calc(1.4rem + 8px);
+}
+
+.posts__body{
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+#page__body{
+  display: block;
+  margin: 0;
+}
+.posts__img {
+  width: 100%;
+  margin-top: 8px;
+  display: block;
+  max-height: 144px;
+}
+.posts__descriptions{
+  @extend %paragraph;
+  margin: 0;
+
+}
+
+#page__descriptions, #page__descriptions--1 , #page__descriptions--2{
+  margin: 5px 0;
+
+  a{
+    color: #43a047;
+    text-decoration: none;
+  }
+}
+
+@include for-tablet-portrait-up {
+ // BASE START min-width: 600 ++++++++
+ .posts__img {
+   width: 100%;
+   margin-top: 13px;
+   margin-bottom: 7px;
+   max-height: 160px;
+   display: block;
+ }
+
+  .posts__body{
+      margin-top: 13px;
+      margin-bottom: 7px;
+  }
+  //.posts__img-mini{
+  //  margin-top: 13px;
+  //  margin-bottom: 7px;
+  //}
+ // BASE END min-width: 600 ++++++++
+}
+@include for-tablet-landscape-up {
+ // BASE START min-width: 900px ++++++++
+ .posts__descriptions{
+   line-height: 25px;
+ }
+ // BASE END min-width: 900px ++++++++
+}
+@include for-desktop-up {
+ // BASE START min-width: 1200px ++++++++
+  #page__title{
+
+    font-size: calc(1.4rem + 10px);
+  }
+  #page__descriptions {
+    margin: 7px 0;
+  }
+ // BASE END min-width: 1200px ++++++++
+}
+@include for-big-desktop-up {
+ // BASE START min-width: 1800 ++++++++
+.posts__descriptions{
+  line-height: 28px;
+}
+ // BASE END min-width: 1800 ++++++++
+}
