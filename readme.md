@@ -14,7 +14,7 @@ Not created yet
 
 Git clone 
 
-    git clone https://github.com/webzwezda/html-mini--blog.git
+    git clone https://github.com/webzwezda/viewofthepast.git
 
 ### Install modules gulp
 
