@@ -8,7 +8,7 @@ html | Only html template
 
 ## Example site
 
-Not created yet
+[site](https://webzwezda.github.io/viewofthepast/index.html)
 
 ## How start
 
