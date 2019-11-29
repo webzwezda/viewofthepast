@@ -1,65 +1,56 @@
-## About repository
+# Инструкция запуска и работы
 
-This repository contains three branches
+Суть этого репозитория в том что бы насадить готовый html шаблон и отправить в продакшен.
 
-branch | description 
----|---
-html | Only html template
+## Разработка и деплой
 
-## Example site
+При запуске jekyll у нас есть несколько важных ключей
 
-[site](https://webzwezda.github.io/viewofthepast/index.html)
+1. ```--config _name-config.yml``` Запустит jekyll c *кастомным конфигурационным файлом*
+2. ```--livereload``` Автоматическая перезагрузка в браузере при изменениях в коде
 
-## How start
+### Разработка
 
-Git clone 
+Конфигурационный файл ```_dev.yml``` нужен для запуска режима разработки. Сам режим запускает при помощи ключа ```--config _dev.yml```
 
-    git clone https://github.com/webzwezda/viewofthepast.git
+#### Пример команды
 
-### Install modules gulp
+```jekyll serve --config _dev.yml --livereload```
 
-Use ubuntu 19.04 i had a problem with nodejs, fix it install [nodejs v11](https://github.com/nodesource/distributions) and delete [.node-gyp](https://codeforgeek.com/make-failed-with-exit-code-2/)
+### Деплой
 
-    sudo npm i -g npm
+## Структура папок
 
-But first install 
+В папкке `index-pagination-pages`  лежат индексные страницы пагинации колекций и категорий
 
-* Nodejs
-* NPM
-* Gulp
 
-All modules ***Gulp***
 
-1. browser-sync
-1. gulp
-1. gulp-concat
-1. gulp-file-include
-1. gulp-if
-1. gulp-minify-css
-1. gulp-sass 
-1. gulp-sourcemaps 
-1. gulp-uglifyjs    
+     <a class="telegram" rel="nofollow" href="https://t.me/share/url?url={{ shareUrl }}&text={{ shareTitle | replace: ' ', "%20"}}">
+        <span>Telegram</span>
+      </a>
 
-Need console spell
 
-    sudo npm i -D gulp gulp-if gulp-sass gulp-file-include gulp-sourcemaps gulp-concat browser-sync gulp-uglifyjs
-
-## Commands for run Gulp
-
-### Develop mode 
-
-Just run *gulp*
-
-    gulp
-
-Well run `gulp default` create a file **main.css** and put in *sourceMap*
-
-### Product mode
-
-It's command not put *sourceMap* in **main.css** 
-
-    NODE_ENV=prod gulp
-
-Command only generate *main.css*
-
-    NODE_ENV=prod gulp sass
+    {% if paginator.page_trail %}
+                    {% for trail in paginator.page_trail %}
+    
+                    {% capture Trurl %}
+                    /{{ trail.num }}/
+                    {% endcapture %}
+    
+                    {% capture purl %}
+                    {{ page.url | remove: "index.html"}}
+                    {% endcapture %}
+    
+                    <li>
+                        <a class="pagination__link
+                        {% if Trurl == purl %}
+                        active
+                        {% elsif trail.num == 1 and  page.url == "/index.html"  %}
+                        active
+                        {% endif %}
+                        " href="{{ trail.path | prepend: site.baseurl | replace: '//', '/' | remove_first: "/index.html"}}">
+                        <span itemprop="name">{{ trail.num }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                    {% endif %}

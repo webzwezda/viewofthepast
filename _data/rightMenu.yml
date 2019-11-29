@@ -1,0 +1,19 @@
+#- name: "Отечественные"
+#  url: "/otechestvennye"
+#
+#  category:
+#  - name: "Ваз"
+#    url: "/vaz"
+#  - name: "Не рогатые"
+#    url: "/no-vaz"
+#
+#- name: "Японские"
+#  url: "/japan"
+#
+#  category:
+#  - name: "Тойота"
+#    url: "/toyota"
+#  - name: "nerogatie"
+#    url: "br"
+#- name: "Мы в ВК"
+#  url: "https://vk.com/club174199975"

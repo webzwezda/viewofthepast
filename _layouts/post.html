@@ -1,0 +1,114 @@
+---
+title: post
+layout: default
+---
+<article class="posts article" itemscope itemtype="http://schema.org/Article">
+
+    <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+        <div itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+            <meta itemprop="width" content="100">
+            <meta itemprop="url" content="{{ "/assets/company-logo.png" | prepend: site.baseurl | prepend: site.url }}">
+        </div>
+        <meta itemprop="name" content="Интернет инвестиции">
+        <meta itemprop="telephone" content="+7 908 461 0434">
+        <meta itemprop="address" content="Владивосток">
+    </div>
+    <div class="_2V-X" id="mainArticle" itemprop="mainEntityOfPage">
+        {% if page.date %}
+        <meta itemprop="datePublished" content="{{ page.date }}">
+        {% endif %}
+        {% if page.dateModified %}
+        <meta itemprop="dateModified" content="{{ page.dateModified }}">
+        {% endif %}
+        <h1 itemprop="headline">
+            {{ page.headline }}
+        </h1>
+<!--3-->
+            <div itemprop="articleBody">
+                <!-- .md start -->
+                {{ content }}
+                <!-- .md END -->
+            </div>
+    <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <img alt="Аватар автора"
+             src="/assets/image/autor-photo.jpg"
+             class="avatar__photo">
+        <h4 class="author-box-title"><span itemprop="name">Ilya Kozel'</span></h4>
+        <div class="author-box-content" itemprop="description">
+            <p>Если здесь вы не нашли ответ на свой вопрос или ответ был не точным, в таком случае напишите нам комментарий.</p>
+            <p>Вы можете выразить свое мнение в нашей группе
+                <a class="my__facebook" rel="nofollow" itemprop="sameAs" target="_blank" href="{{site.vk}}">Вконтакте</a>.</p>
+
+        </div>
+    </section>
+    </div>
+            <aside >
+                <ul id="article__relPosts" >
+
+
+{% assign articleRelCounter--min = 4 %}
+{% assign articleRelCounter--max = 4 %}
+
+                    {% assign counterRelPost = 0 %}
+                    {% for post in site.posts %}
+
+                    {% if page.url != post.url %}
+                    {% assign counterRelPost = counterRelPost | plus: 1 %}
+                    {% include articleRelPost.html %}
+                    {% endif %}
+
+                    {% if counterRelPost == articleRelCounter--min %}
+                    {% break %}
+                    {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </aside>
+            <footer class="posts__footer">
+                <div class="invisible" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                    {% if page.rating %}
+                        <span itemprop="ratingValue">Рейтинг: {{ page.rating.value }}</span>
+                        <meta itemprop="reviewCount" content="{{ page.rating.counter }}">
+                    {% else %}
+                        <span itemprop="ratingValue">Рейтинг: 4</span>
+                        <meta itemprop="reviewCount" content="5">
+                    {% endif %}
+
+                </div>
+                {% include share.html %}
+                <section class="comments">
+                    <h3>Комментарии</h3>
+                    <!--<script type="text/javascript">-->
+                        <!--VK.init({apiId: 6757128, onlyWidgets: true});-->
+                    <!--</script>-->
+
+                    <!--<div id="vk_comments"></div>-->
+                    <!--<script type="text/javascript">-->
+                        <!--VK.Widgets.Comments("vk_comments", {limit: 10, attach: "*"});-->
+                    <!--</script>-->
+
+                    <div id="disqus_thread"></div>
+                    <script>
+
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                        /*
+                        var disqus_config = function () {
+                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        */
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://prsng.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                </section>
+            </footer>
+        </article>

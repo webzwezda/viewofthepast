@@ -1,0 +1,22 @@
+<div class="site__footer">
+    <div class="footer__content">
+        <div class="footer__best">
+            <h4 class="footer__title">Самое интересное</h4>
+                {% assign menu = site.data.footerMenu %}
+            {% for menu in menu %}
+                <ul class="footer__ul {% if menu.id == "even" %}even{% endif %} ">
+                {% for links in menu.links %}
+                    <li>
+                        <a href="{{ links.url | prepend: site.baseurl | prepend: site.url }}">{{ links.name }} </a>
+                    </li>
+
+                {% endfor %}
+            </ul>
+            {% endfor %}
+
+        </div>
+        <div class="footer__copyright">
+            <a class="footer__email" href="mailto:{{ site.email }}?subject=Заголовок&body=Текст">&copy; email</a>
+        </div>
+    </div>
+</div>

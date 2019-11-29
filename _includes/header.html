@@ -1,0 +1,27 @@
+<header class="site__header--wrap">
+    <div class="site__header">
+        <a class="header__homeLink" href="/">
+            <span class="site__logo">Все о пирсинге</span>
+        </a>
+        <nav class="header__menu">
+            <a href="#" id="menu-icon"></a>
+            <ul class="header__menu__ul" itemscope itemtype="http://schema.org/SiteNavigationElement">
+               {% assign data = site.data.rightMenu %}
+                {% for headerMenu in data %}
+                    <li class="header__menu__li">
+                        <a class="header__menu__a {% if page.url contains headerMenu.url %}header__menu__a--activ{% endif %}" itemprop="url" href="{{ headerMenu.url | prepend: site.baseurl | prepend: site.url }}">
+                            <span itemprop="name">{{ headerMenu.name }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+                <li class="header__menu__li">
+                    <a class="header__menu__a" itemprop="url" rel="nofollow" href="{{  "/blog/pirsing-vkontakte/" | prepend: site.baseurl | prepend: site.url }}">
+                        <span itemprop="name">Мы в ВК</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </div>
+</header>

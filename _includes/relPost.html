@@ -1,0 +1,6 @@
+<article class="relPosts">
+    <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}" itemprop="url">
+        <img src="{{ post.previewImage.relPost | prepend: "/assets/image/src" | prepend: site.baseurl | prepend: site.url }}" alt="Превью записи" itemprop="image">
+        <h5 class="relPosts__title" itemprop="headline">{{ post.title }}</h5>
+    </a>
+</article>

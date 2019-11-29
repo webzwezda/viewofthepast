@@ -1,0 +1,27 @@
+- id: "not even"
+
+  links:
+    - name: "Наш блог"
+      url: "/blog/"
+#    - name: "example"
+#      url: "/example0"
+
+#- id: "even"
+#
+#  links:
+#    - name: "name Example"
+#      url: "/example"
+#
+#- id: "not even"
+#
+#  links:
+#    - name: "Наш блог"
+#      url: "/blog"
+#    - name: "example"
+#      url: "/example0"
+#
+#- id: "even"
+#
+#  links:
+#    - name: "name Example"
+#      url: "/example"

@@ -1,0 +1,151 @@
+---
+layout: compress
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+{% include head.html %}
+<body itemscope itemtype="http://schema.org/WebPage">
+{% include header.html %}
+<div class="main--wrap">
+
+<!--1-->
+
+    <main class="main__content" itemscope itemprop="mainContentOfPage">
+        <ul class="breadcrumb__ul" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li class="breadcrumb__li" itemprop="itemListElement" itemscope
+                itemtype="http://schema.org/ListItem">
+                <a class="breadcrumb__link" itemprop="item"  href="/">
+                    <span class="breadcrumb__span" itemprop="name">Главная</span>
+                </a>
+                <meta itemprop="position" content="1" />
+            </li>
+            {% assign breadCounter = 1 %}
+            {% if page.breadcrumb %}
+                {% for breadcrumb in page.breadcrumb %}
+                    {% case breadcrumb.id %}
+                    {% when "collect" %}
+                    {% assign pageCollect = breadcrumb.url | remove: "/" %}
+                    {% when "category" %}
+                    {% assign pageCategory = breadcrumb.url | remove: "/" | remove: pageCollect %}
+                    {% when "tag" %}
+                    {% assign pageTag = breadcrumb.url | remove: "/" | remove: pageCollect | remove: pageCategory %}
+                    {% endcase %}
+                    {% assign breadCounter = breadCounter | plus: 1 %}
+                    <li class="breadcrumb__li" itemprop="itemListElement" itemscope
+                        itemtype="http://schema.org/ListItem">
+                        <a class="breadcrumb__link" itemprop="item" href="{{ breadcrumb.url | prepend: site.baseurl | prepend: site.url | append: "/"}}">
+                            <span class="breadcrumb__span" itemprop="name">{{ breadcrumb.name }}</span>
+                        </a>
+                        <meta itemprop="position" content="{{ breadCounter }}" />
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+
+{{ content }}
+
+    </main>
+    <aside class="main__aside1" itemscope itemtype="http://schema.org/WPSideBar">
+        <div class="relPost--wrap">
+
+{% assign sizeRel--min = 1 %}
+{% assign sizeRel = 4 %}
+{% if pageCategory %}
+
+                {% assign counterRelPost = 0 %}
+                {% for post in site.categories[pageCategory] %}
+                    {% if post.url != page.url and post.previewImage.relPost %}
+                        {% assign counterRelPost = counterRelPost | plus: 1 %}
+                        {% if counterRelPost == sizeRel--min %}
+                        {% assign goRelPosts = true %}
+                        {% assign outputRel = 0 %}
+                            {% for post in site.categories[pageCategory] %}
+                                {% if post.url != page.url and post.previewImage.relPost  %}
+                                    {% assign outputRel = outputRel | plus: 1 %}
+                                    {% include relPost.html %}
+                                {% if outputRel == sizeRel %}
+                                    {% break %}
+                                {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% break %}
+                        {% endif %}
+                    {% endif %}
+                    {% if counterRelPost == sizeRel--min %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+
+                {% unless goRelPosts %}
+                {% assign counterRelPost = 0 %}
+                    {% for post in site.posts %}
+                        {% if post.url != page.url and post.previewImage.relPost %}
+                            {% assign counterRelPost = counterRelPost | plus: 1 %}
+                            {% include relPost.html %}
+                        {% endif %}
+                        {% if counterRelPost == sizeRel %}
+                            {% break %}
+                        {% endif %}
+                    {% endfor %}
+                {% endunless %}
+            {% else %}
+                {% assign counterRelPost = 0 %}
+                {% for post in site.posts %}
+                    {% if post.url != page.url and post.previewImage.relPost %}
+                        {% assign counterRelPost = counterRelPost | plus: 1 %}
+                        {% include relPost.html %}
+                    {% endif %}
+                    {% if counterRelPost == sizeRel %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+       <!--2-->
+
+    </aside>
+    <nav class="main__nav menuRight">
+        <h4 class="toggle" onclick="myFunction()" >Menu &darr;</h4>
+        <ul class="menuRight__nav" id="menu__right" itemscope itemtype="http://schema.org/SiteNavigationElement">
+            {% if pageCollect %}
+            {% assign siteMenu = site.data.rightMenu %}
+            {% assign pageMenu = pageCollect %}
+                {% for menu in siteMenu %}
+                    {% assign clearUrl = menu.url | remove: "/" %}
+                    {% if clearUrl contains pageMenu %}
+
+                        {% for category in menu.category %}
+                        {% capture catUrl %}/{{ category.url | remove: '/' }}/{% endcapture %}
+            <li >
+                <a {% if page.url contains catUrl %}class="menuRight--activ"{% endif %} itemprop="url" href="{{ category.url | prepend: menu.url | prepend: site.baseurl | prepend: site.url | append: "/"}}">
+                    <span itemprop="name">{{ category.name }}</span>
+                </a>
+            </li>
+                        {% endfor %}
+                    {% endif %}
+                    {% if catUrl %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+                {% unless catUrl %}
+                    {% include menuRight.html %}
+                {% endunless %}
+            {% else %}
+                    {% include menuRight.html %}
+            {% endif %}
+        </ul>
+
+    </nav>
+</div>
+
+<footer class="site__footer--wrap">
+    {% include footer.html %}
+</footer>
+
+
+</body>
+</html>
+
+

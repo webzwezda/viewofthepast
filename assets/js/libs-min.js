@@ -1,0 +1,1 @@
+function myFunction(){var n=document.getElementById("menu__right");return!1===counter&&(n.style.display="none",counter=!0),"none"===n.style.display?n.style.display="block":n.style.display="none",counter}var counter=!1;
