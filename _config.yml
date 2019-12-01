@@ -1,9 +1,9 @@
 title: Все виды и названия пирсинга
 email: dadast@outlook.com
 description: "Помогаем разобраться с уходом и обработкой пирсинга, изучаем осложнения и шрамы после прокола"
-url: "https://prsng.ru"
+url: '/'
 baseurl: ""
-author: "Ilya Kozel'"
+author: 'Ilya Kozel'
 vk: "https://vk.com/club182159083"
 
 lang: ru
@@ -12,7 +12,7 @@ encoding: utf-8
 
 pagination:
   enabled: true
-  per_page: 8
+  per_page: 2
   permalink: '/:num/'
   title: ':title | :num of :max'
   limit: 0
@@ -42,7 +42,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - readme.md
-  - examplePost.md
+  - PerfectPage.md
   - note.md
   - node_modules
   - gulpfile.js

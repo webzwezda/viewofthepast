@@ -1,7 +1,7 @@
 ---
 layout: home
-title: Все виды и названия пирсинга
-description: Помогаем разобраться с уходом и обработкой пирсинга, изучаем осложнения и шрамы после прокола
+title: Title for home page in index.md
+description: 'Description for home page in index.md'
 pagination:
   enabled: true
 ---

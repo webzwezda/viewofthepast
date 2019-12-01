@@ -16,61 +16,57 @@ layout: compress
             <li class="breadcrumb__li" itemprop="itemListElement" itemscope
                 itemtype="http://schema.org/ListItem">
                 <a class="breadcrumb__link" itemprop="item"  href="/">
-                    <span class="breadcrumb__span" itemprop="name">Главная</span>
+                    <span class="breadcrumb__span" itemprop="name">Home</span>
                 </a>
                 <meta itemprop="position" content="1" />
             </li>
             {% assign breadCounter = 1 %}
             {% if page.breadcrumb %}
-            {% for breadcrumb in page.breadcrumb %}
-            {% case breadcrumb.id %}
-            {% when "collect" %}
-            {% assign pageCollect = breadcrumb.url | remove: "/" %}
-            {% when "category" %}
-            {% assign pageCategory = breadcrumb.url | remove: "/" | remove: pageCollect %}
-            {% capture catIndex %}
-            /{{pageCategory}}/index.html
-            {% endcapture %}
-            {% when "tag" %}
-            {% assign pageTag = breadcrumb.url | remove: "/" | remove: pageCollect | remove: pageCategory %}
-            {% endcase %}
-            {% assign breadCounter = breadCounter | plus: 1 %}
-            <li class="breadcrumb__li" itemprop="itemListElement" itemscope
-                itemtype="http://schema.org/ListItem">
-                <a class="breadcrumb__link" itemprop="item" href="{{ breadcrumb.url | prepend: site.baseurl | prepend: site.url | append: "/"}}">
-                <span class="breadcrumb__span" itemprop="name">{{ breadcrumb.name }}</span>
-                </a>
-                <meta itemprop="position" content="{{ breadCounter }}" />
-            </li>
-            {% endfor %}
+                {% for breadcrumb in page.breadcrumb %}
+                    {% case breadcrumb.id %}
+                    {% when "category" %}
+                    {% assign pageCategory = breadcrumb.url | remove: "/"  %}
+                    {% when "tag" %}
+                    {% assign pageTag = breadcrumb.url | remove: "/"  | remove: pageCategory %}
+                    {% endcase %}
+                    {% assign breadCounter = breadCounter | plus: 1 %}
+                    <li class="breadcrumb__li" itemprop="itemListElement" itemscope
+                        itemtype="http://schema.org/ListItem">
+                        <a class="breadcrumb__link" itemprop="item"
+                           href="{{ breadcrumb.url | prepend: site.baseurl | prepend: site.url | append: "/" }}">
+                            <span class="breadcrumb__span" itemprop="name">{{ breadcrumb.name }}</span>
+                        </a>
+                        <meta itemprop="position" content="{{ breadCounter }}"/>
+                    </li>
+                {% endfor %}
             {% endif %}
         </ul>
 
 
         {% for post in paginator.posts %}
 
-        {% if page.url == "/index.html" or catIndex  contains page.url %}
+
 
         {% case forloop.index %}
         {% when 1 %}
-        {% assign Imini--1 = post.previewImage.mini %}
+        {% assign PagnPostUrl--1 = post.url %}
         {% when 2 %}
-        {% assign Imini--2 = post.previewImage.mini %}
+        {% assign PagnPostUrl--2 = post.url %}
         {% when 3 %}
-        {% assign Imini--3 = post.previewImage.mini %}
+        {% assign PagnPostUrl--3 = post.url %}
         {% when 4 %}
-        {% assign Imini--4 = post.previewImage.mini %}
+        {% assign PagnPostUrl--4 = post.url %}
         {% when 5 %}
-        {% assign Imini--5 = post.previewImage.mini %}
+        {% assign PagnPostUrl--5 = post.url %}
         {% when 6 %}
-        {% assign Imini--6 = post.previewImage.mini %}
+        {% assign PagnPostUrl--6 = post.url %}
         {% when 7 %}
-        {% assign Imini--7 = post.previewImage.mini %}
+        {% assign PagnPostUrl--7 = post.url %}
         {% when 8 %}
-        {% assign Imini--8 = post.previewImage.mini %}
+        {% assign PagnPostUrl--8 = post.url %}
         {% endcase %}
 
-        {% endif %}
+
 
         {% case forloop.index0 %}
         {% when 2 %}
@@ -120,27 +116,17 @@ layout: compress
                 {% if paginator.page_trail %}
                 {% for trail in paginator.page_trail %}
 
-                {% capture Trurl %}
-                /{{ trail.num }}/
-                {% endcapture %}
 
-                {% capture purl %}
-                {{ page.url | remove: "index.html"}}
-                {% endcapture %}
+
 
                 <li>
                     <a class="pagination__link
-                    {% if Trurl == purl %}
+{% if page.url == trail.path %}
                     active
-                    {% elsif trail.num == 1 and  page.url == "/index.html"  %}
-                    active
-                    {% endif %}
-                    "
-                    {% if forloop.first and trail.path == "/index.html" %}
-                    href="{{ trail.path | prepend: site.baseurl | replace: '//', '/' | replace: '/index.html', '/1/'}}
-                    {% else %}
-                    href="{{ trail.path | append: "/" | prepend: site.baseurl | replace: '//', '/' | remove_first: "/index.html" }}
-                    {% endif %}
+{% endif %}
+"
+                    href="{{ trail.path | prepend: site.baseurl | prepend: site.url | remove: 'index.html'}}
+
                     ">
                     <span itemprop="name">{{ trail.num }}</span>
                     </a>
@@ -163,152 +149,153 @@ layout: compress
     <aside class="main__aside1" itemscope itemtype="http://schema.org/WPSideBar">
         <div class="relPost--wrap">
 
-{% assign sizeRel--min = 1 %}
-{% assign sizeRel = 4 %}
+            {% assign sizeRel--min = 1 %}
+            {% assign sizeRel = 4 %}
 
-{% if catIndex  contains page.url %}
+                {% if pageCategory and pageTag %}
+                    {% assign counterRelPost = 0 %}
 
-
-    {% if pageCategory and pageTag %}
-    {% assign counterRelPost = 0 %}
-
-    {% for post in site.categories[pageCategory] %}
-
-        {% if post.tags contains pageTag and post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
-
-        {% assign counterRelPost = counterRelPost | plus: 1 %}
-
-            {% if counterRelPost == sizeRel--min %}
-            {% assign goRelPosts = true %}
-            {% assign outputRel = 0 %}
-
-                {% for post in site.categories[pageCategory] %}
-
-                    {% if post.tags contains pageTag and post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
-
-                    {% assign outputRel = outputRel | plus: 1 %}
-                     {% include relPost.html %}
-                         {% if outputRel == sizeRel %}
-                         {% break %}
-                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endif %}
-
-    {% if counterRelPost == sizeRel--min %}
-    {% break %}
-    {% endif %}
-
-    {% endfor %}
-
-    {% unless goRelPosts %}
-    {% assign counterRelPost = 0 %}
-
-        {% for post in site.categories[pageCategory] %}
-
-            {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
-
-            {% assign counterRelPost = counterRelPost | plus: 1 %}
-
-            {% if counterRelPost == sizeRel--min %}
-            {% assign goRelPosts = true %}
-            {% assign counterRelPost = 0 %}
-                {% for post in site.categories[pageCategory] %}
-
-                    {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
-
-                    {% assign outputRel = outputRel | plus: 1 %}
-                    {% include relPost.html %}
-                    {% if outputRel == sizeRel %}
-                    {% break %}
-                    {% endif %}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-            {% endif %}
-        {% if counterRelPost == sizeRel--min %}
-        {% break %}
-        {% endif %}
-        {% endfor %}
-    {% endunless %}
-
-        {% unless goRelPosts %}
-        {% assign counterRelPost = 0 %}
-
-            {% for post in site.posts %}
-
-                {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
-
-                {% assign counterRelPost = counterRelPost | plus: 1 %}
-                {% include relPost.html %}
-                {% endif %}
-            {% if counterRelPost == sizeRel %}
-            {% break %}
-            {% endif %}
-            {% endfor %}
-        {% endunless %}
-
-    {% elsif pageCategory %}
-    {% assign counterRelPost = 0 %}
-        {% for post in site.categories[pageCategory] %}
-
-            {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
-
-            {% assign counterRelPost = counterRelPost | plus: 1 %}
-
-                {% if counterRelPost == sizeRel--min %}
-                {% assign goRelPosts = true %}
-                {% assign outputRel = 0 %}
                     {% for post in site.categories[pageCategory] %}
 
-                        {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
+                        {% if post.tags contains pageTag and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
 
-                        {% assign outputRel = outputRel | plus: 1 %}
-                        {% include relPost.html %}
-                        {% if outputRel == sizeRel %}
-                        {% break %}
+                            {% assign counterRelPost = counterRelPost | plus: 1 %}
+
+                            {% if counterRelPost == sizeRel--min %}
+                                {% assign goRelPosts = true %}
+                                {% assign outputRel = 0 %}
+
+                                {% for post in site.categories[pageCategory] %}
+
+                                    {% if post.tags contains pageTag and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                                        {% assign outputRel = outputRel | plus: 1 %}
+                                        {% include relPost.html %}
+                                        {% if outputRel == sizeRel %}
+                                            {% break %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         {% endif %}
+
+
+
+
+
+                        {% if counterRelPost == sizeRel--min %}
+                            {% break %}
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% unless goRelPosts %}
+                    {% assign counterRelPost = 0 %}
+
+                        {% for post in site.categories[pageCategory] %}
+
+                            {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                                {% assign counterRelPost = counterRelPost | plus: 1 %}
+
+                                {% if counterRelPost == sizeRel--min %}
+                                    {% assign goRelPosts = true %}
+                                    {% assign counterRelPost = 0 %}
+                                    {% for post in site.categories[pageCategory] %}
+
+                                        {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                                            {% assign outputRel = outputRel | plus: 1 %}
+                                            {% include relPost.html %}
+                                            {% if outputRel == sizeRel %}
+                                                {% break %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                            {% if counterRelPost == sizeRel--min %}
+                                {% break %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endunless %}
+
+                    {% unless goRelPosts %}
+                    {% assign counterRelPost = 0 %}
+
+                        {% for post in site.posts %}
+
+                            {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                                {% assign counterRelPost = counterRelPost | plus: 1 %}
+                                {% include relPost.html %}
+                            {% endif %}
+                            {% if counterRelPost == sizeRel %}
+                                {% break %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endunless %}
+
+                    {% elsif pageCategory %}
+                    {% assign counterRelPost = 0 %}
+                    {% for post in site.categories[pageCategory] %}
+
+                        {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                            {% assign counterRelPost = counterRelPost | plus: 1 %}
+
+                            {% if counterRelPost == sizeRel--min %}
+                                {% assign goRelPosts = true %}
+                                {% assign outputRel = 0 %}
+                                {% for post in site.categories[pageCategory] %}
+
+                                    {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                                        {% assign outputRel = outputRel | plus: 1 %}
+                                        {% include relPost.html %}
+                                        {% if outputRel == sizeRel %}
+                                            {% break %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% break %}
+                            {% endif %}
+                        {% endif %}
+                        {% if counterRelPost == sizeRel--min %}
+                            {% break %}
                         {% endif %}
                     {% endfor %}
-                {% break %}
-                {% endif %}
-            {% endif %}
-        {% if counterRelPost == sizeRel--min %}
-        {% break %}
-        {% endif %}
-        {% endfor %}
 
-        {% unless goRelPosts %}
-        {% assign counterRelPost = 0 %}
-            {% for post in site.posts %}
+                    {% unless goRelPosts %}
+                    {% assign counterRelPost = 0 %}
+                        {% for post in site.posts %}
 
-                {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
+                            {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
 
-                {% assign counterRelPost = counterRelPost | plus: 1 %}
-                {% include relPost.html %}
-                {% endif %}
-            {% if counterRelPost == sizeRel %}
-            {% break %}
-            {% endif %}
-            {% endfor %}
-            {% endunless %}
-    {% endif %}
+                                {% assign counterRelPost = counterRelPost | plus: 1 %}
+                                {% include relPost.html %}
+                            {% endif %}
+                            {% if counterRelPost == sizeRel %}
+                                {% break %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endunless %}
 
-{% else %}
 
-            {% assign counterRelPost = 0 %}
-            {% for post in site.posts %}
+            {% else %}
 
-            {% if post.url != page.url and post.previewImage.relPost != Imini--1 and post.previewImage.relPost != Imini--2 and post.previewImage.relPost != Imini--3 and post.previewImage.relPost != Imini--4 and post.previewImage.relPost != Imini--5 and post.previewImage.relPost != Imini--6 and post.previewImage.relPost != Imini--7 and post.previewImage.relPost != Imini--8 %}
+                {% assign counterRelPost = 0 %}
+                {% for post in site.posts %}
 
-            {% assign counterRelPost = counterRelPost | plus: 1 %}
-            {% include relPost.html %}
-            {% endif %}
-            {% if counterRelPost == sizeRel %}
-            {% break %}
-            {% endif %}
-            {% endfor %}
+                    {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
+
+                        {% assign counterRelPost = counterRelPost | plus: 1 %}
+                        {% include relPost.html %}
+                    {% endif %}
+                    {% if counterRelPost == sizeRel %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         </div>
         <!--2-->
@@ -317,31 +304,32 @@ layout: compress
     <nav class="main__nav menuRight">
         <h4 class="toggle" onclick="myFunction()" >Menu &darr;</h4>
         <ul class="menuRight__nav" id="menu__right" itemscope itemtype="http://schema.org/SiteNavigationElement">
-{% if pageCollect %}
-{% assign siteMenu = site.data.rightMenu %}
-{% assign pageMenu = pageCollect %}
-    {% for menu in siteMenu %}
-    {% assign clearUrl = menu.url | remove: "/" %}
-         {% if clearUrl contains pageMenu %}
+            {% if pageCollect %}
+                {% assign siteMenu = site.data.rightMenu %}
+                {% assign pageMenu = pageCollect %}
+                {% for menu in siteMenu %}
+                    {% assign clearUrl = menu.url | remove: "/" %}
+                    {% if clearUrl contains pageMenu %}
 
-            {% for category in menu.category %}
-{% capture catUrl %}/{{ category.url | remove: '/' }}/{% endcapture %}
-            <li >
-                <a {% if page.url contains catUrl %}class="menuRight--activ"{% endif %} itemprop="url" href="{{ category.url | prepend: menu.url | prepend: site.baseurl | prepend: site.url | append: "/"}}">
-                <span itemprop="name">{{ category.name }}</span>
-                </a>
-            </li>
-            {% endfor %}
-            {% endif %}
-            {% if catUrl %}
-            {% break %}
-            {% endif %}
-            {% endfor %}
-            {% unless catUrl %}
-            {% include menuRight.html %}
-            {% endunless %}
+                        {% for category in menu.category %}
+                            {% capture catUrl %}/{{ category.url | remove: '/' }}/{% endcapture %}
+                            <li>
+                                <a {% if page.url contains catUrl %}class="menuRight--activ"{% endif %} itemprop="url"
+                                   href="{{ category.url | prepend: menu.url | prepend: site.baseurl | prepend: site.url | append: "/" }}">
+                                    <span itemprop="name">{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                    {% if catUrl %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+                {% unless catUrl %}
+                    {% include menuRight.html %}
+                {% endunless %}
             {% else %}
-            {% include menuRight.html %}
+                {% include menuRight.html %}
             {% endif %}
         </ul>
 

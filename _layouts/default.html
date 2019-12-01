@@ -16,7 +16,7 @@ layout: compress
             <li class="breadcrumb__li" itemprop="itemListElement" itemscope
                 itemtype="http://schema.org/ListItem">
                 <a class="breadcrumb__link" itemprop="item"  href="/">
-                    <span class="breadcrumb__span" itemprop="name">Главная</span>
+                    <span class="breadcrumb__span" itemprop="name">Home</span>
                 </a>
                 <meta itemprop="position" content="1" />
             </li>
@@ -24,18 +24,18 @@ layout: compress
             {% if page.breadcrumb %}
                 {% for breadcrumb in page.breadcrumb %}
                     {% case breadcrumb.id %}
-                    {% when "collect" %}
-                    {% assign pageCollect = breadcrumb.url | remove: "/" %}
                     {% when "category" %}
-                    {% assign pageCategory = breadcrumb.url | remove: "/" | remove: pageCollect %}
+                {% assign pageCategory = breadcrumb.url | remove: "/" | remove: pageCollect %}
                     {% when "tag" %}
                     {% assign pageTag = breadcrumb.url | remove: "/" | remove: pageCollect | remove: pageCategory %}
                     {% endcase %}
                     {% assign breadCounter = breadCounter | plus: 1 %}
                     <li class="breadcrumb__li" itemprop="itemListElement" itemscope
                         itemtype="http://schema.org/ListItem">
-                        <a class="breadcrumb__link" itemprop="item" href="{{ breadcrumb.url | prepend: site.baseurl | prepend: site.url | append: "/"}}">
-                            <span class="breadcrumb__span" itemprop="name">{{ breadcrumb.name }}</span>
+                        <a class="breadcrumb__link" itemprop="item" href="{{ breadcrumb.url | prepend: site.baseurl | prepend: site.url | append: '/' }}">
+                            <span class="breadcrumb__span" itemprop="name">
+                                {{ breadcrumb.name }}
+                            </span>
                         </a>
                         <meta itemprop="position" content="{{ breadCounter }}" />
                     </li>
