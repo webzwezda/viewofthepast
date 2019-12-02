@@ -115,19 +115,8 @@ layout: compress
 
                 {% if paginator.page_trail %}
                 {% for trail in paginator.page_trail %}
-
-
-
-
                 <li>
-                    <a class="pagination__link
-{% if page.url == trail.path %}
-                    active
-{% endif %}
-"
-                    href="{{ trail.path | prepend: site.baseurl | prepend: site.url | remove: 'index.html'}}
-
-                    ">
+                    <a class="pagination__link {% if page.url == trail.path %}active{% endif %}" href="{{ trail.path | prepend: site.baseurl | prepend: site.url | remove: 'index.html'}}">
                     <span itemprop="name">{{ trail.num }}</span>
                     </a>
                 </li>
@@ -149,7 +138,7 @@ layout: compress
     <aside class="main__aside1" itemscope itemtype="http://schema.org/WPSideBar">
         <div class="relPost--wrap">
 
-            {% assign sizeRel--min = 1 %}
+            {% assign sizeRel--min = 2 %}
             {% assign sizeRel = 4 %}
 
                 {% if pageCategory and pageTag %}
@@ -171,16 +160,13 @@ layout: compress
 
                                         {% assign outputRel = outputRel | plus: 1 %}
                                         {% include relPost.html %}
-                                        {% if outputRel == sizeRel %}
-                                            {% break %}
-                                        {% endif %}
+                                {% if outputRel == sizeRel %}
+                                    {% break %}
+                                {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
                         {% endif %}
-
-
-
 
 
                         {% if counterRelPost == sizeRel--min %}
@@ -197,10 +183,10 @@ layout: compress
                             {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
 
                                 {% assign counterRelPost = counterRelPost | plus: 1 %}
-
                                 {% if counterRelPost == sizeRel--min %}
                                     {% assign goRelPosts = true %}
-                                    {% assign counterRelPost = 0 %}
+                                    {% assign outputRel = 0 %}
+
                                     {% for post in site.categories[pageCategory] %}
 
                                         {% if post.url != page.url and post.previewImage.relPost and PagnPostUrl--1 != post.url and PagnPostUrl--2 != post.url and PagnPostUrl--3 != post.url and PagnPostUrl--4 != post.url and PagnPostUrl--5 != post.url and PagnPostUrl--6 != post.url and PagnPostUrl--7 != post.url and PagnPostUrl--8 != post.url %}
@@ -212,6 +198,7 @@ layout: compress
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}
+
                                 {% endif %}
                             {% endif %}
                             {% if counterRelPost == sizeRel--min %}
@@ -258,7 +245,6 @@ layout: compress
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                                {% break %}
                             {% endif %}
                         {% endif %}
                         {% if counterRelPost == sizeRel--min %}
@@ -304,19 +290,19 @@ layout: compress
     <nav class="main__nav menuRight">
         <h4 class="toggle" onclick="myFunction()" >Menu &darr;</h4>
         <ul class="menuRight__nav" id="menu__right" itemscope itemtype="http://schema.org/SiteNavigationElement">
-            {% if pageCollect %}
+            {% if pageCategory %}
                 {% assign siteMenu = site.data.rightMenu %}
-                {% assign pageMenu = pageCollect %}
+                {% assign pageMenu = pageCategory %}
                 {% for menu in siteMenu %}
                     {% assign clearUrl = menu.url | remove: "/" %}
                     {% if clearUrl contains pageMenu %}
 
-                        {% for category in menu.category %}
-                            {% capture catUrl %}/{{ category.url | remove: '/' }}/{% endcapture %}
+                        {% for tag in menu.tag %}
+                            {% capture catUrl %}/{{ tag.url | remove: '/' }}/{% endcapture %}
                             <li>
                                 <a {% if page.url contains catUrl %}class="menuRight--activ"{% endif %} itemprop="url"
-                                   href="{{ category.url | prepend: menu.url | prepend: site.baseurl | prepend: site.url | append: "/" }}">
-                                    <span itemprop="name">{{ category.name }}</span>
+                                   href="{{ tag.url | prepend: menu.url | prepend: site.baseurl | prepend: site.url | append: "/" }}">
+                                    <span itemprop="name">{{ tag.name }}</span>
                                 </a>
                             </li>
                         {% endfor %}
@@ -328,6 +314,26 @@ layout: compress
                 {% unless catUrl %}
                     {% include menuRight.html %}
                 {% endunless %}
+
+                {% elsif page.url == '/index.html' or page.url == site.url %}
+
+                {% if page.menuRight == 1 %}
+                    {% assign siteMenu = site.data.rightMenu %}
+
+                    {% for menu in siteMenu %}
+                        {% assign clearUrl = menu.url | remove: "/" %}
+                        <li>
+                            <a  itemprop="url"
+                               href="{{ menu.url | prepend: site.baseurl | prepend: site.url | append: "/" }}">
+                                <span itemprop="name">{{ menu.name }}</span>
+                            </a>
+                        </li>
+
+                    {% endfor %}
+                {% else %}
+                    {% include menuRight.html %}
+                {% endif %}
+
             {% else %}
                 {% include menuRight.html %}
             {% endif %}

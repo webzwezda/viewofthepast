@@ -1,8 +1,8 @@
 - id: "not even"
 
   links:
-    - name: "Наш блог"
-      url: "/blog/"
+    - name: "category1"
+      url: "/category1/"
 #    - name: "example"
 #      url: "/example0"
 

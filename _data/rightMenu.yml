@@ -1,19 +1,21 @@
-#- name: "Отечественные"
-#  url: "/otechestvennye"
-#
-#  category:
-#  - name: "Ваз"
-#    url: "/vaz"
+- name: "category1"
+  url: "/category1"
+
+  tag:
+  - name: "tag1"
+    url: "/tag1"
+  - name: "tag3"
+    url: "/tag3"
 #  - name: "Не рогатые"
 #    url: "/no-vaz"
-#
-#- name: "Японские"
-#  url: "/japan"
-#
-#  category:
-#  - name: "Тойота"
-#    url: "/toyota"
+
+- name: "catrgory2"
+  url: "/category2"
+
+  tag:
+  - name: "tag2"
+    url: "/tag2"
+  - name: "tag4"
+    url: "/tag4"
 #  - name: "nerogatie"
 #    url: "br"
-#- name: "Мы в ВК"
-#  url: "https://vk.com/club174199975"

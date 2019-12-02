@@ -1,3 +1,7 @@
+## output menuRight
+
+if home page contains `menuRight: 0` to output `menuRight.html`, if page category or page tag do't breadcrumb.category to output `menuRight.html`
+
 # Инструкция запуска и работы
 
 Суть этого репозитория в том что бы насадить готовый html шаблон и отправить в продакшен.
