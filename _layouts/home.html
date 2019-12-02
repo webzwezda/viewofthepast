@@ -42,6 +42,36 @@ layout: compress
             {% endif %}
         </ul>
 
+        {% if page.info %}
+            {% capture infoUrl %} {{ page.url | remove: "/index.html"}} {% endcapture %}
+            {% capture catUrl %} /{{ page.category | remove: "/index.html"}} {% endcapture %}
+
+            {% if infoUrl == catUrl %}
+
+
+                <section class="posts" >
+
+                    <h1 id="page__title" class="posts__title" >
+                        {{ page.info.title }}
+                    </h1>
+
+                    <div id="page__body" class="posts__body">
+
+                        {% for paragraph in page.info.description %}
+                            <p id="page__descriptions" class="posts__descriptions">
+                                {{paragraph.p}}
+                                {% if forloop.last and page.info.link %}
+                                    <a href="{{page.info.link.url}}">{{page.info.link.text}}</a>
+                                {% endif %}
+                            </p>
+                        {% endfor %}
+                    </div>
+
+                </section>
+
+            {% endif %}
+
+        {% endif %}
 
         {% for post in paginator.posts %}
 
