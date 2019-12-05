@@ -108,7 +108,7 @@
         </aside>
 
   <p class="centre--img">
-    <img src="./assets/image/src/000.gif" alt="title">
+    <img itemprop="image" src="./assets/image/src/000.gif" alt="title">
   </p>
 
   <p class="p0">
@@ -175,7 +175,9 @@
             </div>
         </aside>
 
-  <div class="thumb-wrap" markdown="block" >
+        <!-- markdown="block" Добавить этот атрибут в div.thumb-wrap -->
+
+  <div class="thumb-wrap"  >
     <iframe width="560" height="315" src="https://www.youtube.com/embed/Y421bWMelqE" allowfullscreen></iframe>
   </div>
 
@@ -308,18 +310,6 @@
 
         <hr>
 
-        <h4>Jekyll it not support</h4>
-
-        <ul class="task-list">
-            <li class="task-list-item">
-                <input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked">this is a complete item
-            </li>
-            <li class="task-list-item">
-                <input type="checkbox" class="task-list-item-checkbox" disabled="disabled">this is an incomplete item</li>
-            <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked">supported</li>
-            <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked">list syntax required</li>
-        </ul>
-
         <aside class="eee--article">
             <div>
                 <img src="http://placehold.it/1280X200/455a64/fff" alt="">
@@ -345,18 +335,65 @@
             </dd>
         </dl>
 
+<nav class="inArticle__paginatePosts">
+    <a class="inArticle__paginatePosts__prev" href="#"><span class="inArticle__paginatePosts__prev--hex">&#xab;</span> <span>Предыдущая</span></a>
+    <a class="inArticle__paginatePosts__next" href="#"><span>Следующая</span> <span class="inArticle__paginatePosts__next-hex">&#xbb;</span></a>
+</nav>
+
+
+
+
+        <script>
+            let inputName = ['formInputLabel', 'formInputTargets'];
+            let chenge = Math.floor(Math.random() * 1000) + 100;
+
+            addOrderId();
+            function addOrderId() {
+                let echName;
+                for (let i = 0; i < inputName.length; i++) {
+                    echName = document.getElementById(inputName[i]);
+                    echName.value = chenge;
+                }
+            }
+        </script>
+
   <!-- .md END -->
     </div>
+
+<aside class="donate">
+
+    <div class="donate__yd">
+        <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+            <input type="hidden" name="receiver" value="410015929747788">
+            <input type="hidden" name="formcomment" value="На развитие">
+            <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+            <input type="hidden" name="label" id="formInputLabel" value="$order_id">
+            <input type="hidden" name="quickpay-form" value="donate">
+            <input type="hidden" name="targets" id="formInputTargets" value="транзакция {order_id}">
+            <input type="text" name="sum" value="100" data-type="number">
+            <input type="hidden" name="comment" value="На новый контент">
+            <input type="hidden" name="need-fio" value="false">
+            <input type="hidden" name="need-email" value="false">
+            <input type="hidden" name="need-phone" value="false">
+            <input type="hidden" name="need-address" value="false">
+            <input type="hidden" name="paymentType" value="PC">
+            <input type="submit" value="Перевести">
+        </form>
+    </div>
+
+    <div class="donate__btc">
+        bts
+    </div>
+
+</aside>
 
     <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
         <img alt="Аватар автора"
              src="./assets/autor-photo.jpg"
              class="avatar__photo">
-        <h4 class="author-box-title"><span itemprop="name">Ilya Kozel'</span></h4>
+        <h4 class="author-box-title"><a href="https://vk.com/id519179248"><span itemprop="name">Ilya Kozel'</span></a></h4>
         <div class="author-box-content" itemprop="description">
             <p>Как веб мастер постараюсь сделать все возможное для вас. <br> Я считаю информация должна быть полезной и доступной прям как человек её написавший.</p>
-            <p>Вы можете связаться со мной в
-                <a class="my__facebook" itemprop="sameAs" href="https://vk.com/id519179248">Vkontakte</a>.</p>
 
         </div>
     </section>
@@ -376,11 +413,6 @@
 </ul>
 </aside>
    <footer class="posts__footer">
-    <div class="invisible" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-        <span>Райтинг:</span>
-        <span itemprop="ratingValue">5</span>
-        <meta itemprop="reviewCount" content="5">
-    </div>
    @@include('share.html')
    <section class="comments">
      <h3>Comments</h3>
