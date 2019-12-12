@@ -5,7 +5,7 @@ function myFunction() {
     if(counter === false){
         x.style.display = "none";
         counter = true;
-    };
+    }
 
     if (x.style.display === 'none') {
         x.style.display = 'block';
@@ -14,3 +14,4 @@ function myFunction() {
     }
     return counter;
 }
+

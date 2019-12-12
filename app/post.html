@@ -335,101 +335,129 @@
             </dd>
         </dl>
 
-<nav class="inArticle__paginatePosts">
-    <a class="inArticle__paginatePosts__prev" href="#"><span class="inArticle__paginatePosts__prev--hex">&#xab;</span> <span>Предыдущая</span></a>
-    <a class="inArticle__paginatePosts__next" href="#"><span>Следующая</span> <span class="inArticle__paginatePosts__next-hex">&#xbb;</span></a>
-</nav>
-
-
-
-
-        <script>
-            let inputName = ['formInputLabel', 'formInputTargets'];
-            let chenge = Math.floor(Math.random() * 1000) + 100;
-
-            addOrderId();
-            function addOrderId() {
-                let echName;
-                for (let i = 0; i < inputName.length; i++) {
-                    echName = document.getElementById(inputName[i]);
-                    echName.value = chenge;
-                }
-            }
-        </script>
+        <nav class="inArticle__paginatePosts">
+            <a class="inArticle__paginatePosts__prev" href="#">
+                <span
+                        class="inArticle__paginatePosts__prev--hex">
+                    &#xab;
+                </span>
+                <span>Предыдущая</span>
+            </a>
+            <a class="inArticle__paginatePosts__next" href="#">
+                <span>Следующая</span>
+                <span
+                        class="inArticle__paginatePosts__next-hex">
+                    &#xbb;
+                </span>
+            </a>
+        </nav>
 
   <!-- .md END -->
     </div>
 
-<aside class="donate">
 
-    <div class="donate__yd">
-        <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-            <input type="hidden" name="receiver" value="410015929747788">
-            <input type="hidden" name="formcomment" value="На развитие">
-            <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
-            <input type="hidden" name="label" id="formInputLabel" value="$order_id">
-            <input type="hidden" name="quickpay-form" value="donate">
-            <input type="hidden" name="targets" id="formInputTargets" value="транзакция {order_id}">
-            <input type="text" name="sum" value="100" data-type="number">
-            <input type="hidden" name="comment" value="На новый контент">
-            <input type="hidden" name="need-fio" value="false">
-            <input type="hidden" name="need-email" value="false">
-            <input type="hidden" name="need-phone" value="false">
-            <input type="hidden" name="need-address" value="false">
-            <input type="hidden" name="paymentType" value="PC">
-            <input type="submit" value="Перевести">
-        </form>
-    </div>
+        <aside class="donate">
+<div class="donate__method  donate__method--wrap">
 
-    <div class="donate__btc">
-        bts
-    </div>
+    <button class="donate__method__btn donate__method__btn--triangle donate__method__btn--yd ">
+        Yandex <span>Money</span>
+    </button>
 
-</aside>
+    <button class="donate__method__btn   donate__method__btn--btc">
+        Bitcoin
+    </button>
 
-    <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <img alt="Аватар автора"
-             src="./assets/autor-photo.jpg"
-             class="avatar__photo">
-        <h4 class="author-box-title"><a href="https://vk.com/id519179248"><span itemprop="name">Ilya Kozel'</span></a></h4>
-        <div class="author-box-content" itemprop="description">
-            <p>Как веб мастер постараюсь сделать все возможное для вас. <br> Я считаю информация должна быть полезной и доступной прям как человек её написавший.</p>
-
-        </div>
-    </section>
-    </div>
-  <aside >
-<ul id="article__relPosts" >
-  <li>
-      <article>
-          <a href="/post-4" ><h5 >Post 4</h5></a>
-      </article>
-  </li>
-    <li>
-      <article>
-          <a href="/post-4"><h5 >Post 4</h5></a>
-      </article>
-  </li>
-</ul>
-</aside>
-   <footer class="posts__footer">
-   @@include('share.html')
-   <section class="comments">
-     <h3>Comments</h3>
-     Commentarii
-   </section>
-   </footer>
-</article>
-  </main>
-    <aside class="main__aside1" itemscope itemtype="http://schema.org/WPSideBar">
-    @@include("menuRight--relPosts.html")
-    </aside>
-  <nav class="main__nav menuRight">
-    @@include("rightMenu.html")
-  </nav>
 </div>
 
-@@include("footer.html")
 
-</body>
-</html>
+<section id="donateYd" class="donate__yd donate__displayOn">
+    <h3>Yandex <span>Money</span></h3>
+    <form class="donate__yd__form" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+        <input type="hidden" name="receiver" value="410015929747788">
+        <input type="hidden" name="formcomment" value="На развитие">
+        <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+        <input type="hidden" name="label" id="formInputLabel" value="$order_id">
+        <input type="hidden" name="quickpay-form" value="donate">
+        <input type="hidden" name="targets" id="formInputTargets" value="транзакция {order_id}">
+        <input class="donate__yd__form__field" type="text" name="sum" value="100" data-type="number">
+        <input type="hidden" name="comment" value="На новый контент">
+        <input type="hidden" name="need-fio" value="false">
+        <input type="hidden" name="need-email" value="false">
+        <input type="hidden" name="need-phone" value="false">
+        <input type="hidden" name="need-address" value="false">
+        <input type="hidden" name="paymentType" value="PC">
+        <input class="donate__yd__form__submit donate__yd__form__submit--primary donate__yd__form__submit--inside" type="submit" value="Пожертвовать">
+    </form>
+</section>
+
+            <section id="donateBtc" class="donate__btc">
+                    <h3 class="donate__btc__title ">Bitcoin</h3>
+
+                 <button id="copyme" class="donate__btc__adress btn" data-clipboard-action="copy"
+                          data-clipboard-target="#copyme">1AsfMahP38eBEsNAvaZ4mQgyB4a4NadPhr
+                  </button>
+
+                      <img class="donate__btc__qr" src="assets/image/src/donate-btc.jpg" alt="">
+
+              </section>
+          </aside>
+
+        <script>
+            var cb = new Clipboard('.btn');
+            cb.on('success', function (e) {
+                btCopy();
+                window.setTimeout(function () {
+                    e.clearSelection();
+                }, 800);
+            });
+        </script>
+
+
+      <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <img alt="Аватар автора"
+               src="./assets/image/src/aqua.jpg"
+               class="avatar__photo">
+          <h4 class="author-box-title"><a href="https://vk.com/id519179248"><span itemprop="name">Ilya Kozel'</span></a></h4>
+          <div class="author-box-content" itemprop="description">
+              <p>Я разработчик работающий один. Пожалуйста, рассмотрите возможность сделать пожертвование. <br> Спасибо что посетили нас.</p>
+
+          </div>
+      </section>
+
+
+      </div>
+    <aside >
+  <ul id="article__relPosts" >
+    <li>
+        <article>
+            <a href="/post-4" ><h5 >Post 4</h5></a>
+        </article>
+    </li>
+      <li>
+        <article>
+            <a href="/post-4"><h5 >Post 4</h5></a>
+        </article>
+    </li>
+  </ul>
+  </aside>
+     <footer class="posts__footer">
+     @@include('share.html')
+     <section class="comments">
+       <h3>Comments</h3>
+       Commentarii
+     </section>
+     </footer>
+  </article>
+    </main>
+      <aside class="main__aside1" itemscope itemtype="http://schema.org/WPSideBar">
+      @@include("menuRight--relPosts.html")
+      </aside>
+    <nav class="main__nav menuRight">
+      @@include("rightMenu.html")
+    </nav>
+  </div>
+
+  @@include("footer.html")
+
+  </body>
+  </html>
