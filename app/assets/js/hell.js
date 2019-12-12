@@ -30,7 +30,7 @@ function mobileOrDesktop() {
             var hellMobileButton = document.getElementById('hellMobile__button');
             hellMobileButton.onclick = click;
 
-        }, 2000);
+        }, 1800);
 
     } else {
 
