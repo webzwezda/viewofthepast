@@ -293,17 +293,8 @@
  font-weight: normal;
    line-height: 1.3em;
 }
-.eeeBlock--2{
-  margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  img{
-    max-width: 100%;
-    vertical-align: bottom;
-  }
-}
+
+
 ///////////FOTER START+++++++++++++++++++
 .footer__best{
   display: flex;
@@ -744,10 +735,7 @@
 .relPosts{
  flex: 0 1 49%;
 }
-.eeeBlock--2 {
-    position: sticky;
-    top: 20px;
-}
+
 //////////////FOTER START  ++++++++++++++++++
 .even{
   margin-right: 20px;

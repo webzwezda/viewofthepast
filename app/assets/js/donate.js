@@ -6,7 +6,7 @@ function init() {
         btnDonate[i].onclick = changeMethod;
         addOrderId();
     }
-
+    mobileOrDesktop();
 }
 
 

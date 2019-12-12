@@ -44,7 +44,8 @@ gulp.task('browser-sync', function() {
           return gulp.src('./app/assets/**/*.js')
               .pipe(concat('libs-min.js'))
               .pipe(uglify())
-              .pipe(gulp.dest('./build/assets/js'));
+              .pipe(gulp.dest('./build/assets/js'))
+  .pipe(browserSync.reload({stream:true}));
   });
 
   gulp.task("assets", function(){
@@ -56,5 +57,6 @@ gulp.task('default', ['browser-sync','html',"sass",'assets', 'can__min--js'], fu
 	gulp.watch(['app/_include/*.*',"./app/index.html","./app/post.html"], ['html']);
 	gulp.watch('app/_sass/**/*.scss', ['sass']);
 	gulp.watch('./app/assets/**/*.*' , ['assets']);
+	gulp.watch('./app/assets/js/*.*' , ['can__min--js']);
 	gulp.watch('build/index.html', browserSync.reload);
 });
