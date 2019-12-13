@@ -196,15 +196,19 @@ layout: compress
                 {% endfor %}
             {% endif %}
         </div>
-       <!--2-->
+        <aside id="hellRight" class="hellRight">
+            <div id="ydstick" class="ydstick">
+
+            </div>
+        </aside>
 
     </aside>
     <nav class="main__nav menuRight">
         <h4 class="toggle" onclick="myFunction()" >Menu &darr;</h4>
         <ul class="menuRight__nav" id="menu__right" itemscope itemtype="http://schema.org/SiteNavigationElement">
-            {% if pageCollect %}
+            {% if pageCategory %}
             {% assign siteMenu = site.data.rightMenu %}
-            {% assign pageMenu = pageCollect %}
+            {% assign pageMenu = pageCategory %}
                 {% for menu in siteMenu %}
                     {% assign clearUrl = menu.url | remove: "/" %}
                     {% if clearUrl contains pageMenu %}
@@ -222,6 +226,7 @@ layout: compress
                         {% break %}
                     {% endif %}
                 {% endfor %}
+
                 {% unless catUrl %}
                     {% include menuRight.html %}
                 {% endunless %}
@@ -237,7 +242,7 @@ layout: compress
     {% include footer.html %}
 </footer>
 
-
+<script src="/assets/js/hell.js"></script>
 </body>
 </html>
 

@@ -8,9 +8,6 @@ date: 2019-10-12
 dateModified: 2019-10-12
 category: category2
 tags: tag2
-rating: 
-    value: 5
-    counter: 10
 image: '/OpenGraphImage.jpg'        ## 1280x720
 previewImage: 
     presentPost: /660x159.jpg       ## 660x159   

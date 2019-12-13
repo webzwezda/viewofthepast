@@ -29,15 +29,160 @@ layout: default
                 {{ content }}
                 <!-- .md END -->
             </div>
+
+        {% if page.breadcrumb %}
+        {% for breadcrumb in page.breadcrumb %}
+        {% case breadcrumb.id %}
+        {% when "category" %}
+        {% assign pageCategory = breadcrumb.url | remove: "/"  %}
+        {% when "tag" %}
+        {% assign pageTag = breadcrumb.url | remove: "/"  | remove: pageCategory %}
+        {% endcase %}
+        {% endfor %}
+        {% endif %}
+
+
+        {% assign cat = page.category %}
+
+        {% if pageCategory and pageTag  %}
+
+
+
+
+            {% for post in site.categories[cat] %}
+                {% if post.tags contains pageTag %}
+                {% if post.url == page.url %}
+                    {% assign post_index0 = forloop.index0 %}
+                    {% assign post_index1 = forloop.index %}
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+
+
+
+            {% for post in site.categories[cat] %}
+                {% if  post.tags contains pageTag %}
+                {% if post_index0 == forloop.index %}
+                    {% assign next_post = post %}
+                {% endif %}
+                {% if post_index1 == forloop.index0 %}
+                    {% assign prev_post = post %}
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% elsif pageCategory %}
+
+            {% for post in site.categories[cat] %}
+                {% if post.url == page.url %}
+                    {% assign post_index0 = forloop.index0 %}
+                    {% assign post_index1 = forloop.index %}
+                {% endif %}
+            {% endfor %}
+
+            {% for post in site.categories[cat] %}
+                {% if post_index0 == forloop.index %}
+                    {% assign next_post = post %}
+                {% endif %}
+                {% if post_index1 == forloop.index0 %}
+                    {% assign prev_post = post %}
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+            {% for post in site.posts %}
+                {% if post.url == page.url %}
+                    {% assign post_index0 = forloop.index0 %}
+                    {% assign post_index1 = forloop.index %}
+                {% endif %}
+            {% endfor %}
+
+            {% for post in site.posts %}
+                {% if post_index0 == forloop.index %}
+                    {% assign next_post = post %}
+                {% endif %}
+                {% if post_index1 == forloop.index0 %}
+                    {% assign prev_post = post %}
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+        <nav class="inArticle__paginatePosts">
+            {% if prev_post %}
+            <a class="inArticle__paginatePosts__prev" href="{{ prev_post.url }}">
+                <span
+                        class="inArticle__paginatePosts__prev--hex">
+                    &#xab;
+                </span>
+                <span>Предыдущая</span>
+            </a>
+            {% endif %}
+            {% if next_post %}
+            <a class="inArticle__paginatePosts__next" href="{{ next_post.url }}">
+                <span>Следующая</span>
+                <span
+                        class="inArticle__paginatePosts__next-hex">
+                    &#xbb;
+                </span>
+            </a>
+            {% endif %}
+        </nav>
+
+        <aside class="donate">
+            <div class="donate__method  donate__method--wrap">
+
+                <button class="donate__method__btn donate__method__btn--triangle donate__method__btn--yd ">
+                    Yandex <span>Money</span>
+                </button>
+
+                <button class="donate__method__btn   donate__method__btn--btc">
+                    Bitcoin
+                </button>
+
+            </div>
+
+
+            <section id="donateYd" class="donate__yd donate__displayOn">
+                <h3>Yandex <span>Money</span></h3>
+                <form class="donate__yd__form" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                    <input type="hidden" name="receiver" value="410015929747788">
+                    <input type="hidden" name="formcomment" value="На развитие">
+                    <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+                    <input type="hidden" name="label" id="formInputLabel" value="$order_id">
+                    <input type="hidden" name="quickpay-form" value="donate">
+                    <input type="hidden" name="targets" id="formInputTargets" value="транзакция {order_id}">
+                    <input class="donate__yd__form__field" type="text" name="sum" value="100" data-type="number">
+                    <input type="hidden" name="comment" value="На новый контент">
+                    <input type="hidden" name="need-fio" value="false">
+                    <input type="hidden" name="need-email" value="false">
+                    <input type="hidden" name="need-phone" value="false">
+                    <input type="hidden" name="need-address" value="false">
+                    <input type="hidden" name="paymentType" value="PC">
+                    <input class="donate__yd__form__submit donate__yd__form__submit--primary donate__yd__form__submit--inside" type="submit" value="Пожертвовать">
+                </form>
+            </section>
+
+            <section id="donateBtc" class="donate__btc">
+                <h3 class="donate__btc__title ">Bitcoin</h3>
+
+                <button id="copyme" class="donate__btc__adress btn" data-clipboard-action="copy"
+                        data-clipboard-target="#copyme">1AsfMahP38eBEsNAvaZ4mQgyB4a4NadPhr
+                </button>
+
+                <img class="donate__btc__qr" src="/assets/image/donate-btc.jpg" alt="">
+
+            </section>
+        </aside>
+
     <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
         <img alt="Аватар автора"
              src="/assets/image/autor-photo.jpg"
              class="avatar__photo">
         <h4 class="author-box-title"><span itemprop="name">Ilya Kozel'</span></h4>
         <div class="author-box-content" itemprop="description">
-            <p>Если здесь вы не нашли ответ на свой вопрос или ответ был не точным, в таком случае напишите нам комментарий.</p>
-            <p>Вы можете выразить свое мнение в нашей группе
-                <a class="my__facebook" rel="nofollow" itemprop="sameAs" target="_blank" href="{{site.vk}}">Вконтакте</a>.</p>
+            <p>Я разработчик работающий один. Пожалуйста, рассмотрите возможность сделать пожертвование.<br>Напишите комментарий если не нашли ответа на свой вопрос.</p>
 
         </div>
     </section>
@@ -65,16 +210,7 @@ layout: default
                 </ul>
             </aside>
             <footer class="posts__footer">
-                <div class="invisible" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                    {% if page.rating %}
-                        <span itemprop="ratingValue">Рейтинг: {{ page.rating.value }}</span>
-                        <meta itemprop="reviewCount" content="{{ page.rating.counter }}">
-                    {% else %}
-                        <span itemprop="ratingValue">Рейтинг: 4</span>
-                        <meta itemprop="reviewCount" content="5">
-                    {% endif %}
 
-                </div>
                 {% include share.html %}
 
                 <section class="comments">

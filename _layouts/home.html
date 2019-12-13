@@ -49,25 +49,32 @@ layout: compress
             {% if infoUrl == catUrl %}
 
 
-                <section class="posts" >
 
-                    <h1 id="page__title" class="posts__title" >
-                        {{ page.info.title }}
-                    </h1>
 
-                    <div id="page__body" class="posts__body">
 
-                        {% for paragraph in page.info.description %}
-                            <p id="page__descriptions" class="posts__descriptions">
-                                {{paragraph.p}}
-                                {% if forloop.last and page.info.link %}
-                                    <a href="{{page.info.link.url}}">{{page.info.link.text}}</a>
-                                {% endif %}
-                            </p>
-                        {% endfor %}
-                    </div>
 
-                </section>
+                    <section class="posts" >
+
+                        <h1 class="paginate__title" >
+                            {{ page.info.title }}
+                        </h1>
+
+                        <div class="posts__body paginate__description">
+
+                            {% for paragraph in page.info.description %}
+                                <p class="posts__descriptions">
+                                    {{paragraph.p}}
+                                    {% if forloop.last and page.info.link %}
+                                        <a class="paginate__description__link" target="_blank" href="{{page.info.link.url}}"><span>&nbsp;</span>{{page.info.link.text}}</a>
+                                    {% endif %}
+                                </p>
+                            {% endfor %}
+
+                        </div>
+                        </section>
+
+
+
 
             {% endif %}
 
@@ -376,7 +383,7 @@ layout: compress
     {% include footer.html %}
 </footer>
 
-
+<script src="/assets/js/hell.js"></script>
 </body>
 </html>
 

@@ -7,9 +7,6 @@ keywords: "one key, two key"
 date: 2019-10-03
 dateModified: 2019-10-03
 category: category1
-rating: 
-    value: 5
-    counter: 10
 image: '/OpenGraphImage.jpg'        ## 1280x720
 previewImage: 
     presentPost: /660x159.jpg       ## 660x159   

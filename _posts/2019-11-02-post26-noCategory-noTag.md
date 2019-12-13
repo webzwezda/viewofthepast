@@ -1,13 +1,11 @@
 ---
 layout: post
-title: 'Post4 category1 tag1'
+title: 'Post26 no category no tag'
 headline: 'Title for inside post'
 description: 'The maximum number of characters in the description is 160. This description of the record will be slightly larger, which will allow you to see the flaws if they are. The text was created with the help of Google translator.'
 keywords: "one key, two key"
-date: 2019-10-04
-dateModified: 2019-10-04
-category: category1
-tags: tag1
+date: 2019-11-02
+dateModified: 2019-11-02
 image: '/OpenGraphImage.jpg'        ## 1280x720
 previewImage: 
     relPost: /220x157.jpg           ## 220x157 /assets/image/src/
@@ -22,13 +20,6 @@ slider:
           alt: 'alt image 660x159'
         - src: /220x157.jpg
           alt: 'alt image 220x157'
-breadcrumb:
-  - id: category
-    name: category1
-    url: /category1
-  - id: tag
-    name: tag1
-    url: /category1/tag1
 ---
 
 After *navigating* this article, **the usb drive** is bootable, by the machine you used to create it or another machine. This can be used to make any operating system ISO file ***bootable on a USB drive***

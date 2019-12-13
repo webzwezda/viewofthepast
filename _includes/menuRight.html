@@ -1,12 +1,7 @@
 <li itemprop="name">
-    <a itemprop="url" href="{{ site.url }}">Главная</a>
+    <a itemprop="url" href="{{ site.url }}">Home</a>
 </li>
 <li itemprop="name">
-    <a itemprop="url" href="{{ '/blog/' | prepend: site.baseurl | prepend: site.url }}">Наш блог</a>
+    <a itemprop="url" href="{{ '/404/' | prepend: site.baseurl | prepend: site.url }}">404</a>
 </li>
-<li itemprop="name">
-    <a itemprop="url" {% if page.url contains '/nose/' %}class="menuRight--activ"{% endif %}  href="{{ '/nose/' | prepend: site.baseurl | prepend: site.url }}">Пирсинг носа</a>
-</li>
-<li itemprop="name">
-    <a itemprop="url" {% if page.url contains '/pypok/' %}class="menuRight--activ"{% endif %}  href="{{ '/pypok/' | prepend: site.baseurl | prepend: site.url }}">Пирсинг пупка</a>
-</li>
+
