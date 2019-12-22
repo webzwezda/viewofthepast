@@ -176,11 +176,21 @@ layout: default
             </section>
         </aside>
 
+        <script>
+            var cb = new Clipboard('.btn');
+            cb.on('success', function (e) {
+                btCopy();
+                window.setTimeout(function () {
+                    e.clearSelection();
+                }, 800);
+            });
+        </script>
+
     <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
         <img alt="Аватар автора"
              src="/assets/image/autor-photo.jpg"
              class="avatar__photo">
-        <h4 class="author-box-title"><span itemprop="name">Ilya Kozel'</span></h4>
+        <h4 class="author-box-title"><a href="https://vk.com/id519179248"><span itemprop="name">Ilya Kozel'</span></a></h4>
         <div class="author-box-content" itemprop="description">
             <p>Я разработчик работающий один. Пожалуйста, рассмотрите возможность сделать пожертвование.<br>Напишите комментарий если не нашли ответа на свой вопрос.</p>
 
