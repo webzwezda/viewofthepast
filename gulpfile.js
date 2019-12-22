@@ -41,16 +41,16 @@ gulp.task('sass', function () {
 });
 
 gulp.task("can__min--js", function () {
-    return gulp.src( !'./app/assets/**/*.js' )
+    return gulp.src( ['!./app/assets/js/donate.js' ,'./app/assets/**/*.js']  )
         .pipe(concat('libs-min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./build/assets/js'))
         .pipe(browserSync.reload({stream:true}));
 });
+
 gulp.task("js", function () {
-    return gulp.src( './app/assets/**/*.js' )
+    return gulp.src( './app/assets/js/donate.js' )
         .pipe(gulp.dest('./build/assets/js'))
-        .pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task("assets", function(){
