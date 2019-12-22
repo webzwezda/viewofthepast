@@ -41,20 +41,24 @@ gulp.task('sass', function () {
 });
 
 gulp.task("can__min--js", function () {
-    return gulp.src( './app/assets/**/*.js' )
+    return gulp.src( !'./app/assets/**/*.js' )
         .pipe(concat('libs-min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./build/assets/js'))
         .pipe(browserSync.reload({stream:true}));
 });
-
+gulp.task("js", function () {
+    return gulp.src( './app/assets/**/*.js' )
+        .pipe(gulp.dest('./build/assets/js'))
+        .pipe(browserSync.reload({stream:true}));
+});
 
 gulp.task("assets", function(){
     return gulp.src(["!./app/assets/**/*.js" ,"./app/assets/**"])
         .pipe(gulp.dest("./build/assets"))
 });
 
-gulp.task('default', ['browser-sync','html',"sass",'assets', 'can__min--js'], function() {
+gulp.task('default', ['js', 'browser-sync','html',"sass",'assets', 'can__min--js'], function() {
     gulp.watch(['app/_include/*.*',"./app/index.html","./app/post.html"], ['html']);
     gulp.watch('app/_sass/**/*.scss', ['sass']);
     gulp.watch('./app/assets/**/*.*' , ['assets']);

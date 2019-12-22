@@ -1,4 +1,4 @@
-window.onload = init;
+
 
 function init() {
     btnDonate = document.getElementsByClassName('donate__method__btn');
@@ -61,4 +61,4 @@ function btCopy() {
 }
 
 
-
+init();
