@@ -6,7 +6,13 @@ function init() {
         btnDonate[i].onclick = changeMethod;
         addOrderId();
     }
-
+    var cb = new Clipboard('.btn');
+    cb.on('success', function (e) {
+        btCopy();
+        window.setTimeout(function () {
+            e.clearSelection();
+        }, 800);
+    });
 }
 
 

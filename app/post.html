@@ -44,6 +44,8 @@
 
   <p class="p0">Although Gogol was considered by his contemporaries to be one of the <em>preeminent figures of the natural school of Russian literary realism</em>, later critics have found in his work a fundamentally romantic sensibility, with strains of surrealism and the grotesque <strong>("The Nose", "Viy", "The Overcoat", "Nevsky Prospekt")</strong>.</p>
 
+
+
   <ol id="anchor">
    <li>
     <a href="#" >Nikolai Gogol</a>
@@ -401,16 +403,6 @@
               </section>
           </aside>
 
-        <script>
-            var cb = new Clipboard('.btn');
-            cb.on('success', function (e) {
-                btCopy();
-                window.setTimeout(function () {
-                    e.clearSelection();
-                }, 800);
-            });
-        </script>
-
 
       <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
           <img alt="Аватар автора"
@@ -418,7 +410,7 @@
                class="avatar__photo">
           <h4 class="author-box-title"><a href="https://vk.com/id519179248"><span itemprop="name">Ilya Kozel'</span></a></h4>
           <div class="author-box-content" itemprop="description">
-              <p>Я разработчик работающий один. Пожалуйста, рассмотрите возможность сделать пожертвование.<br>Напишите комментарий если не нашли ответа на свой вопрос.</p>
+              <p>Я разработчик работающий один. Пожалуйста, рассмотрите возможность сделать пожертвование</p>
 
           </div>
       </section>
@@ -441,10 +433,10 @@
   </aside>
      <footer class="posts__footer">
      @@include('share.html')
-     <section class="comments">
+   <!--  <section class="comments">
        <h3>Comments</h3>
        Commentarii
-     </section>
+     </section> -->
      </footer>
   </article>
     </main>
@@ -459,6 +451,7 @@
   </div>
 
   @@include("footer.html")
-<script src="/assets/js/donate.js"></script>
+
+<script async src="/assets/js/donate.js"></script>
   </body>
   </html>
