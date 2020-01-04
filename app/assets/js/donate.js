@@ -13,6 +13,7 @@ function init() {
             e.clearSelection();
         }, 800);
     });
+    socialLock();
 }
 
 
